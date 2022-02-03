@@ -38,13 +38,13 @@ app.put("/repositories/:id", (request, response) => {
     return response.status(404).json({ error: "Repository not found" });
   }
 
-  const findRepository = repositories.find(repository => repository.id === id);
-
-  if (updatedRepository.likes === findRepository.likes) {
-    return response.status(404).json({ error: "Not updated because not likes manually" });
-  } 
+  console.log(updatedRepository);
   
-  const repository = { ...repositories[repositoryIndex], ...updatedRepository };
+  const repository = { ...repositories[repositoryIndex], ...{
+    title: updatedRepository.title,
+    techs: updatedRepository.techs,
+    url: updatedRepository.url
+  } };
 
   repositories[repositoryIndex] = repository;
 
